@@ -28,7 +28,7 @@ class Stack {
     }
 }
 
-public class stack5PrefixToPostfix{
+public class stack6PostfixToInfix{
 
     public static boolean isOperator(char s) {
         if (s == '+' || s == '-' || s == '*' || s == '/') {
@@ -39,23 +39,21 @@ public class stack5PrefixToPostfix{
     }
 
     public static void main(String args[]){
-        String prefix;
+        String postfix;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the prefix expression:");
-        prefix = sc.nextLine();
-        Stack sob = new Stack(prefix.length());
-        char[] temp = prefix.toCharArray();
-        for(int i = prefix.length()-1;i>=0;i--){
-            if(isOperator(temp[i]) == true){
+        System.out.println("Enter the postfix expression:");
+        postfix = sc.nextLine();
+        Stack sob = new Stack(postfix.length());
+        for(int i=0;i<postfix.length();i++){
+            if(isOperator(postfix.charAt(i))==true){
                 String temp1 = sob.pop();
                 String temp2 = sob.pop();
-                String temp3 = temp1 + temp2 + temp[i];
-                sob.push(temp3);
+                sob.push("(" + temp2 + postfix.charAt(i) + temp1 + ")");
             }
             else{
-                sob.push("" + temp[i]);
+                sob.push(""+ postfix.charAt(i));
             }
         }
-        System.out.println("The postfix expression:" + sob.pop());
+        System.out.println("Infix Expression : " + sob.pop());
     }
 }

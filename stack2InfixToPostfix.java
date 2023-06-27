@@ -28,7 +28,7 @@ class Stack {
     }
 }
 
-public class infixToPostfix {
+public class stack2InfixToPostfix {
 
     public static boolean isOperator(char s) {
         if (s == '+' || s == '-' || s == '*' || s == '/') {

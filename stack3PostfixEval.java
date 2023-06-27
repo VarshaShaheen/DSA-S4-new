@@ -28,7 +28,7 @@ class Stack {
     }
 }
 
-public class postfixEval{
+public class stack3PostfixEval{
     
     public static boolean isOperator(char s) {
         if (s == '+' || s == '-' || s == '*' || s == '/') {

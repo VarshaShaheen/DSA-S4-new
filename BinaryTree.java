@@ -1,44 +1,65 @@
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+class node{
+    int data;
+    node lchild;
+    node rchild;
 
-    TreeNode(int val) {
-        this.val = val;
+    public node(int data){
+        this.data = data;
+        lchild = rchild = null;
     }
 }
 
-public class BinaryTree {
-    TreeNode root;
-
-    // Helper function for inorder traversal (left-root-right)
-    private void inorderTraversal(TreeNode root) {
-        if (root == null) {
+public class BinaryTree{
+    node head;
+    public BinaryTree(){
+        head = null;
+    }
+    public void insert(int x){
+        node nl = new node(x);
+        node current = head;
+        node parent = current;
+        if(head == null){
+            head = nl;
             return;
         }
-        inorderTraversal(root.left);
-        System.out.println(root.val);
-        inorderTraversal(root.right);
-       
+        while(true){
+            if(x <= current.data){
+                parent = current;
+                current = current.lchild;
+                if(current == null){
+                    parent.lchild = nl;
+                    return ;
+                }
+            }
+            else{
+                parent = current;
+                current = current.rchild;
+                if(current == null){
+                    parent.rchild = nl;
+                    return ;
+                }
+            }
+        }
     }
-
-    // Entry point for inorder traversal
-    public void inorderTraversal() {
-        inorderTraversal(root);
+    public void inorder(){
+        inorder(head);
     }
-
-    public static void main(String[] args) {
-        BinaryTree binaryTree = new BinaryTree();
-
-        // Create a sample binary tree
-        binaryTree.root = new TreeNode(1);
-        binaryTree.root.left = new TreeNode(2);
-        binaryTree.root.right = new TreeNode(3);
-        binaryTree.root.left.left = new TreeNode(4);
-        binaryTree.root.left.right = new TreeNode(5);
-
-        // Perform inorder traversal and print the result
-        System.out.print("Inorder Traversal: ");
-        binaryTree.inorderTraversal();
+    
+    public void inorder(node current){
+        if (current != null) {
+            inorder(current.lchild);
+            System.out.println(current.data);
+            inorder(current.rchild);
+        } 
+    }
+    
+    public static void main(String args[]){
+        BinaryTree b = new BinaryTree();
+        b.insert(5);
+        b.insert(2);
+        b.insert(6);
+        b.insert(1);
+        b.insert(3);
+        b.inorder();
     }
 }

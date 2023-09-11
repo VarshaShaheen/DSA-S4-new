@@ -39,23 +39,28 @@ public class stack5PrefixToPostfix{
     }
 
     public static void main(String args[]){
-        String prefix;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the prefix expression:");
+        String prefix,temp1,temp2,temp;
+        String rev = "";
+        char current;
+        System.out.println("Enter the string:");
         prefix = sc.nextLine();
-        Stack sob = new Stack(prefix.length());
-        char[] temp = prefix.toCharArray();
-        for(int i = prefix.length()-1;i>=0;i--){
-            if(isOperator(temp[i]) == true){
-                String temp1 = sob.pop();
-                String temp2 = sob.pop();
-                String temp3 = temp1 + temp2 + temp[i];
-                sob.push(temp3);
+        Stack s = new Stack(prefix.length());
+        for (int i = prefix.length() - 1; i >= 0; i--) {
+            rev = rev + (prefix.charAt(i));
+        }
+        for(int i = 0;i< rev.length();i++){
+            current = rev.charAt(i);
+            if(Character.isLetterOrDigit(current) == true){
+                s.push("" + current);
             }
             else{
-                sob.push("" + temp[i]);
+                temp1 = s.pop();
+                temp2 = s.pop();
+                temp = temp1 + temp2 + current;
+                s.push(temp);
             }
         }
-        System.out.println("The postfix expression:" + sob.pop());
+        System.out.println(s.pop());
     }
 }
